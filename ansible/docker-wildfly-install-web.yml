@@ -1,0 +1,49 @@
+---
+- hosts: web
+  sudo: yes
+  gather_facts: no
+
+  tasks:
+
+    - name: delete wildfly project
+      command : rm -r docker-wildfly
+
+    - name: get the docker file for wildfly
+      command : git clone https://github.com/mjhazbri/docker-wildfly.git
+
+    - name: stop obsolete container of wildfly
+      docker:
+        image: wildfly_image
+        state: absent
+
+    - name: remove wildfly image
+      docker_image:
+        state: absent
+        name: wildfly_image
+        tag: wildfly_image
+
+    - name: Build wildfly image
+      docker_image:
+        path: ./docker-wildfly
+        name: wildfly_image
+        tag: wildfly_image
+        push: no
+
+    - name: running wildfly container from the wildfly image
+      docker:
+        name: wildfly_container
+        image: wildfly_image
+        state: started
+        ports:
+        - "80:8080"
+        - "90:9990"
+        #volumes:
+        #- /data
+
+
+#    - name : build the wildfly image
+#      command : docker build -t wildfly_image ./docker-wildfly
+
+#    - name: run docker container
+#      command : docker run -p 80:8080 -p 90:9990 -i --name wildfly_container wildfly_image
+
