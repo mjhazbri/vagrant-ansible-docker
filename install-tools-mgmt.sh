@@ -14,15 +14,14 @@ chown -R vagrant:vagrant /home/vagrant
 cat >> /etc/hosts <<EOL
 
 # vagrant environment nodes
-10.0.15.10  mgmt
-10.0.15.11  lb
-10.0.15.21  web1
-10.0.15.22  web2
-10.0.15.23  web3
-10.0.15.24  web4
-10.0.15.25  web5
-10.0.15.26  web6
-10.0.15.27  web7
-10.0.15.28  web8
-10.0.15.29  web9
+192.168.1.2  mgmt
+192.168.1.3  rp
+192.168.1.4  database
+192.168.1.5  nosql
+192.168.1.6  jenkins
+192.168.1.7  sonar
+192.168.1.8  nexus
+192.168.1.21  webapp1
+192.168.1.22  webapp2
+192.168.1.23  webapp3
 EOL

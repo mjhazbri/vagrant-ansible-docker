@@ -26,7 +26,7 @@
       docker_image:
         path: ./docker-wildfly
         name: wildfly_image
-        tag: wildfly_image
+        #tag: wildfly_image
         push: no
 
     - name: running wildfly container from the wildfly image
